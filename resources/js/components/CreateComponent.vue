@@ -12,10 +12,12 @@
         <div class="mb-3">
             <input type="submit" @click.prevent="addPerson" class="btn btn-primary" value="Добавить">
         </div>
+        <SomeComponent :obj="obj"></SomeComponent>
     </div>
 </template>
 
 <script>
+import SomeComponent from "./SomeComponent";
 export default {
     name: "CreateComponent",
 
@@ -24,7 +26,20 @@ export default {
             name: null,
             age: null,
             job: null,
+            obj: {
+                color: 'yellow',
+                number: 50,
+                isPublished: false
+            }
         }
+    },
+
+    mounted() {
+
+    },
+
+    components: {
+        SomeComponent
     },
 
     methods: {
