@@ -1,5 +1,5 @@
 <template>
-    <div >
+    <div>
         <table class="table">
             <thead>
             <tr>
@@ -13,15 +13,8 @@
             </thead>
             <tbody>
             <template v-for="person in people">
-            <tr :class="isEdit(person.id) ? 'd-none' : '' ">
-                <th scope="row">{{ person.id }}</th>
-                <td>{{ person.name }}</td>
-                <td>{{ person.age }}</td>
-                <td>{{ person.job }}</td>
-                <td><a href="#" @click.prevent="changeEditPersonId(person.id, person.name, person.age, person.job )" class="btn btn-success">Edit</a> </td>
-                <td><a href="#" @click.prevent="deletePerson(person.id)" class="btn btn-danger">Delete</a> </td>
-            </tr>
-            <EditComponent :person="person" :ref="`edit_${person.id}`"></EditComponent>
+                <ShowComponent :person="person" :ref="`show${person.id}`"></ShowComponent>
+                <EditComponent :person="person" :ref="`edit_${person.id}`"></EditComponent>
             </template>
 
             </tbody>
@@ -31,11 +24,12 @@
 
 <script>
 import EditComponent from "./EditComponent";
+import ShowComponent from "./ShowComponent";
 export default {
     name: "IndexComponent",
 
     data() {
-        return{
+        return {
             people: null,
             editPersonId: null,
             name: null,
@@ -50,15 +44,16 @@ export default {
     },
 
     components: {
-      EditComponent
+        EditComponent,
+        ShowComponent
     },
 
     methods: {
-        getPeople(){
+        getPeople() {
             axios.get('/api/people')
-            .then(res => {
-                this.people = res.data
-            })
+                .then(res => {
+                    this.people = res.data
+                })
         },
 
         updatePerson(id) {
