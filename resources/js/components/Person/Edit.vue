@@ -1,12 +1,12 @@
 <template>
     <div>
-        Single post
+        Edit
     </div>
 </template>
 
 <script>
 export default {
-    name: "SinglePostComponent"
+    name: "Edit"
 }
 </script>
 
