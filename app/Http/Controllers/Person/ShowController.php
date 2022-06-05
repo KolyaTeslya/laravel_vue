@@ -8,11 +8,10 @@ use App\Http\Resources\Person\PersonResource;
 use App\Models\Person;
 use Illuminate\Http\Request;
 
-class IndexController extends Controller
+class ShowController extends Controller
 {
-   public function __invoke()
-   {
-       $people = Person::all();
-       return PersonResource::collection($people);
-   }
+    public function __invoke(Person $person)
+    {
+        return new PersonResource($person);
+    }
 }
